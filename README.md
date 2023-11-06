@@ -1,7 +1,7 @@
-# AppointmentsManager App
+# TasksManager App
 
-This web application was created in ASP.Net Web Api and React.JS to manage appointments or similar things.
+This web application was created using ASP.Net Web API and React.JS to manage tasks, appointments, etc.
 
 ### About
 
-I created this app to practice my React.JS and ASP.Net Web Api knowledge.
+I created this app to practice my React.JS and ASP.Net Web API knowledge.

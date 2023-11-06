@@ -83,8 +83,8 @@ export default function Home(props) {
   }, [refreshData])
   return (
     <main>
-      <h1>Manage Your Appointments / Dates very easy</h1>
-      <p>This powerful web applicaiton helps you to manage your dates very easy.</p>
+      <h1>Manage Your Tasks</h1>
+
       <div className="add-btn row items-center content-center">
         <div className="btn add" onClick={() => openModal("new-modal")}>+</div>
       </div>

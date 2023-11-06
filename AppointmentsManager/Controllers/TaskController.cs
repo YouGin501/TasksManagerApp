@@ -12,18 +12,18 @@ namespace AppointmentsManager.Controllers
 {
     [Route("api/appointment")]
     [ApiController]
-    public class AppointmentController : ControllerBase
+    public class TaskController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public AppointmentController(AppDbContext context)
+        public TaskController(AppDbContext context)
         {
             _context = context;
         }
 
         // GET: api/appointment - default
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Appointment>>> GetAppointments()
+        public async Task<ActionResult<IEnumerable<MyTask>>> GetAppointments()
         {
           if (_context.Appointments == null)
           {
@@ -34,7 +34,7 @@ namespace AppointmentsManager.Controllers
 
         // GET: api/appointment/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Appointment>> GetAppointment(int id)
+        public async Task<ActionResult<MyTask>> GetAppointment(int id)
         {
           if (_context.Appointments == null)
           {
@@ -52,14 +52,14 @@ namespace AppointmentsManager.Controllers
 
         // POST: api/appointment/filters
         [HttpPost("filters")]
-        public async Task<ActionResult<IEnumerable<Appointment>>> FilteredAppointments(Filter filters)
+        public async Task<ActionResult<IEnumerable<MyTask>>> FilteredAppointments(Filter filters)
         {
             if (_context.Appointments == null)
             {
                 return NotFound("No Data Found!");
             }
 
-            List<Appointment> allData = await _context.Appointments.ToListAsync();
+            List<MyTask> allData = await _context.Appointments.ToListAsync();
 
             if (filters.All)
             {
@@ -95,7 +95,7 @@ namespace AppointmentsManager.Controllers
         // PUT: api/appointment/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAppointment(int id, Appointment appointment)
+        public async Task<IActionResult> PutAppointment(int id, MyTask appointment)
         {
             if (id != appointment.ID)
             {
@@ -106,7 +106,7 @@ namespace AppointmentsManager.Controllers
 
             try{
 
-                Appointment entry_ = await _context.Appointments.FirstAsync(e=> e.ID == appointment.ID);
+                MyTask entry_ = await _context.Appointments.FirstAsync(e=> e.ID == appointment.ID);
 
                 if(entry_.Title != appointment.Title)
                 {
@@ -168,7 +168,7 @@ namespace AppointmentsManager.Controllers
         // POST: api/appointment
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Appointment>> PostAppointment(Appointment appointment)
+        public async Task<ActionResult<MyTask>> PostAppointment(MyTask appointment)
         {
           if (_context.Appointments == null)
           {
@@ -195,13 +195,13 @@ namespace AppointmentsManager.Controllers
             {
                 return NotFound("No Data Found!");
             }
-            Appointment appointment = await _context.Appointments.FirstAsync(e=> e.ID == id);
+            MyTask appointment = await _context.Appointments.FirstAsync(e=> e.ID == id);
             if (appointment == null)
             {
                 return NotFound("No appointment with the ID " + id );
             }
 
-            Appointment entry_ = await _context.Appointments.FirstAsync(e => e.ID == appointment.ID);
+            MyTask entry_ = await _context.Appointments.FirstAsync(e => e.ID == appointment.ID);
             entry_.ModifiedDate = DateTime.Now;
             entry_.Deleted = true;
             await _context.SaveChangesAsync();
